@@ -2,6 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import {Button} from "@/components/ui/button.tsx";
 
 const AppApi = (window as any).chrome.webview.hostObjects.appApi
 function App() {
@@ -19,9 +20,9 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-          <button onClick={async () => setCount(await Add(count))}>
+          <Button onClick={async () => setCount(await Add(count))}>
               a + b = {count}
-          </button>
+          </Button>
           <p>
               Edit <code>src/App.tsx</code> and save to test HMR
           </p>
