@@ -3,8 +3,9 @@ namespace ToNSaveManager.Utils.API;
 [System.Runtime.InteropServices.ComVisible(true)]
 public class AppApi
 {
-    public int Add(int a)
+    public string GetAppVersion()
     {
-        return a + 2;
+        var currentVersion = Program.GetVersion();
+        return currentVersion == null ? "unknown" : currentVersion.ToString();
     }
 }

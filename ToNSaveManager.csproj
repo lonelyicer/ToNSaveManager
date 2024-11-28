@@ -76,6 +76,7 @@
 
   <ItemGroup>
     <Folder Include="Properties\DataSources\" />
+    <Folder Include="public\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -92,9 +93,5 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="pnpm build &amp;&amp; xcopy &quot;$(ProjectDir)dist&quot; &quot;$(TargetDir)&quot; /E /I /Y" />
-  </Target>
 
 </Project>
