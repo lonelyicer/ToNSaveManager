@@ -57,6 +57,7 @@
   <ItemGroup>
     <PackageReference Include="DiscordRichPresence" Version="1.2.1.24" />
     <PackageReference Include="Jint" Version="4.0.2" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2950-prerelease" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="OpenRGB.NET" Version="3.1.1" />
     <PackageReference Include="SharpZipLib" Version="1.4.2" />
@@ -91,5 +92,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="pnpm build &amp;&amp; xcopy &quot;$(ProjectDir)dist&quot; &quot;$(TargetDir)&quot; /E /I /Y" />
+  </Target>
 
 </Project>

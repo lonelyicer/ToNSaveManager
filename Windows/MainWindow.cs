@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Microsoft.Web.WebView2.Core;
 using ToNSaveManager.Extensions;
 using ToNSaveManager.Models;
 using ToNSaveManager.Utils;
@@ -26,6 +27,7 @@ namespace ToNSaveManager
 
         public MainWindow() {
             InitializeComponent();
+            InitializeWebView();
             listBoxKeys.FixItemHeight();
             listBoxEntries.FixItemHeight();
 
@@ -36,6 +38,20 @@ namespace ToNSaveManager
         }
         #endregion
 
+        // ReSharper disable once AsyncVoidMethod
+        private async void InitializeWebView()
+        {
+            await webView.EnsureCoreWebView2Async();
+#if !DEBUG
+            webView.CoreWebView2.SetVirtualHostNameToFolderMapping("html.sample", "./dist", CoreWebView2HostResourceAccessKind.Deny);
+            webView.Source = new Uri("http://html.sample/index.html");
+#else
+            webView.Source = new Uri("http://localhost:5174");
+            webView.CoreWebView2.OpenDevToolsWindow();
+#endif
+            var appApi = new AppApi();
+            webView.CoreWebView2.AddHostObjectToScript("appApi", appApi);
+        }
         #region Form Events
 
         #region Main Window
@@ -1061,6 +1077,5 @@ namespace ToNSaveManager
         }
 
         #endregion
-
     }
 }
