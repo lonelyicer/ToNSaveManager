@@ -46,7 +46,7 @@ namespace ToNSaveManager
             webView.CoreWebView2.SetVirtualHostNameToFolderMapping("html.sample", "./dist", CoreWebView2HostResourceAccessKind.Deny);
             webView.Source = new Uri("http://html.sample/index.html");
 #else
-            webView.Source = new Uri("http://localhost:5174");
+            webView.Source = new Uri("http://localhost:5173");
             webView.CoreWebView2.OpenDevToolsWindow();
 #endif
             var appApi = new AppApi();
@@ -62,6 +62,7 @@ namespace ToNSaveManager
 
         private void MainWindow_FormClosing(object sender, FormClosingEventArgs e) {
             Logger.Debug("Main Window is closing.");
+            webView.Dispose();
             WinSettings.Get.LastWindowWidth = this.Width;
             WinSettings.Get.LastWindowHeight = this.Height;
             WinSettings.Get.LastWindowSplit = splitContainer1.SplitterDistance;

@@ -133,3 +133,57 @@
 .project-table-button:hover .project-table-header-chevron-up-down {
   visibility: visible;
 }
+
+h1 {
+  @apply text-2xl;
+}
+
+h2 {
+  @apply text-xl;
+}
+
+h3 {
+  @apply text-lg;
+}
+
+h4 {
+  @apply text-base;
+}
+
+h5 {
+  @apply text-base;
+}
+
+h6 {
+  @apply text-sm;
+}
+
+.page-entering {
+  opacity: 0;
+  transform: translateY(20%);
+}
+
+.page-entered {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms ease, transform 300ms ease;
+}
+
+.page-exiting {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-exited {
+  opacity: 0;
+  transform: translateY(-20%);
+  transition: opacity 300ms ease, transform 300ms ease;
+}
+
+.page-container {
+  position: relative;
+  height: 100%;
+}
+
+
+

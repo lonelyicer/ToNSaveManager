@@ -1,12 +1,14 @@
 import {Button} from "@/components/ui/button.tsx";
 import {Card} from "@/components/ui/card.tsx";
 import {List, Settings} from "lucide-react";
-import { Link } from "react-router-dom";
 import React, {useEffect, useState} from "react";
+import {useTranslation} from "react-i18next";
 
 export function SideBar({ className }: { className?: string }) {
     "use client";
-    
+
+
+    const { t } = useTranslation();
     const appApi = (window as any).chrome.webview.hostObjects.appApi;
     const [appVersion, setAppVersion] = useState<string>("");
 
@@ -27,7 +29,7 @@ export function SideBar({ className }: { className?: string }) {
             >
                 <div className="flex flex-col gap-1 p-2 min-w-40 flex-grow">
                     <SideBarItem href={"/"} text={"Home"} icon={List} />
-                    <SideBarItem href={"/settings"} text={"Settings"} icon={Settings} />
+                    <SideBarItem href={"/settings"} text={t("MAIN.SETTINGS")} icon={Settings} />
                     <Button
                         variant={"ghost"}
                         className={
@@ -54,20 +56,16 @@ function SideBarItem({
 }) {
     const IconElement = icon;
     return (
-        <Link
-            to={href}
-            className="no-underline text-current w-full"
+        <Button
+            variant="ghost"
+            className="justify-start flex-shrink-0 w-full"
+            onClick={() => window.location.hash = href}
         >
-            <Button
-                variant="ghost"
-                className="justify-start flex-shrink-0 w-full"
-            >
-                <div className="mr-4">
-                    <IconElement className="h-5 w-5" />
-                </div>
-                {text}
-            </Button>
-        </Link>
+            <div className="mr-4">
+                <IconElement className="h-5 w-5" />
+            </div>
+            {text}
+        </Button>
     );
 }
 
